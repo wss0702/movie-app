@@ -1,0 +1,25 @@
+/* MovieRow.css */
+
+.movie-row {
+  color: white;
+  margin-left: 20px;
+}
+
+.movie-row__posters {
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  padding: 20px 0;
+}
+
+.movie-row__poster {
+  max-height: 200px;
+  object-fit: contain;
+  margin-right: 10px;
+  transition: transform 450ms;
+}
+
+.movie-row__poster:hover {
+  transform: scale(1.08);
+  opacity: 1;
+}
