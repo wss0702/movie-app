@@ -6,7 +6,7 @@ import axios from 'axios'
 
 function App() {
   const token = import.meta.env.VITE_APP_TOKEN
-
+  
   console.log(token)
 
   return (
