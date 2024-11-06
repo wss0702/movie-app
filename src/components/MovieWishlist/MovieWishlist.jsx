@@ -1,14 +1,10 @@
-// MovieWishlist.jsx
-
 import React, {
   useState,
   useEffect,
   useRef,
-  useContext,
   useCallback,
 } from 'react';
 import './MovieWishlist.css';
-import { WishlistContext } from '../../contexts/WishlistContext';
 
 function MovieWishlist() {
   const gridContainerRef = useRef(null);
@@ -18,7 +14,7 @@ function MovieWishlist() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [currentView, setCurrentView] = useState('grid');
   const [visibleWishlistMovies, setVisibleWishlistMovies] = useState([]);
-  const { wishlistMovies, toggleWishlist } = useContext(WishlistContext);
+  const [wishlistMovies, setWishlistMovies] = useState([]); // 상태 추가
 
   const calculateLayout = useCallback(() => {
     if (gridContainerRef.current) {
@@ -117,7 +113,9 @@ function MovieWishlist() {
               <div
                 key={movie.id}
                 className="movie-card"
-                onClick={() => toggleWishlist(movie)}
+                onClick={() => {
+                  // 여기에 toggleWishlist 로직을 추가할 수 있음
+                }}
               >
                 <img src={getImageUrl(movie.poster_path)} alt={movie.title} />
                 <div className="movie-title">{movie.title}</div>
