@@ -4,7 +4,7 @@ import React, {
   useRef,
   useCallback,
 } from 'react';
-import './MovieWishlist.css';
+import './Wishlist.css';
 
 function MovieWishlist() {
   const gridContainerRef = useRef(null);

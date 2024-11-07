@@ -5,7 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import Header from './components/layout/Header/Header';
 
-import WishlistPage from './components/MovieWishlist/MovieWishlist';
+import WishlistPage from './components/pages/wishlist/Wishlist';
 import { BaseService } from './client';
 
 const fetchData = async () => {
