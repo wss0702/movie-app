@@ -2,18 +2,19 @@
 
 import React, { useState, useEffect } from 'react';
 import './HomeMain.css';
-import Banner from '../../../views/home-main/Banner';
-import MovieRow from '../../../views/home-main/MovieRow';
-import URLService from '../../../util/movie/URLService';
+//import Banner from './Banner/Banner';
+//import MovieRow from './MovieRow/MovieRow';
+//import URLService from '../../../util/movie/URLService';
+
 
 function HomeMain() {
-  const [featuredMovie, setFeaturedMovie] = useState(null);
-  const [popularMoviesUrl, setPopularMoviesUrl] = useState('');
-  const [newReleasesUrl, setNewReleasesUrl] = useState('');
-  const [actionMoviesUrl, setActionMoviesUrl] = useState('');
-  const apiKey = localStorage.getItem('TMDb-Key') || '';
+  //const [featuredMovie, setFeaturedMovie] = useState(null);
+  //const [popularMoviesUrl, setPopularMoviesUrl] = useState('');
+  //const [newReleasesUrl, setNewReleasesUrl] = useState('');
+  //const [actionMoviesUrl, setActionMoviesUrl] = useState('');
+  //const apiKey = localStorage.getItem('TMDb-Key') || '';
 
-  useEffect(() => {
+/*  useEffect(() => {
     const urlService = new URLService();
 
     setPopularMoviesUrl(urlService.getURL4PopularMovies(apiKey));
@@ -25,9 +26,9 @@ function HomeMain() {
       setFeaturedMovie(movie);
     };
 
-    loadFeaturedMovie();
+    loadFeaturedMovie();*/
 
-    const scrollListener = () => {
+    /*const scrollListener = () => {
       const header = document.querySelector('.app-header');
       if (window.scrollY > 50) {
         header?.classList.add('scrolled');
@@ -41,15 +42,13 @@ function HomeMain() {
     return () => {
       window.removeEventListener('scroll', scrollListener);
     };
-  }, [apiKey]);
+  }, [apiKey]);*/
 
   return (
     <div className="home">
-      <Banner movie={featuredMovie} />
-
-      <MovieRow title="인기 영화" fetchUrl={popularMoviesUrl} />
-      <MovieRow title="최신 영화" fetchUrl={newReleasesUrl} />
-      <MovieRow title="액션 영화" fetchUrl={actionMoviesUrl} />
+      인기영화
+      최신영화
+      액션영화
     </div>
   );
 }
