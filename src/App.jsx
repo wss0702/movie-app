@@ -5,7 +5,9 @@ import { Routes, Route } from 'react-router-dom';
 
 import Header from './components/layout/Header/Header';
 
+
 import WishlistPage from './components/pages/wishlist/Wishlist';
+import HomeMain from './components/pages/main/HomeMain';
 import { BaseService } from './client';
 
 const fetchData = async () => {
@@ -20,7 +22,7 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<><Header /><div>hello world!</div></>} />
+        <Route path="/" element={<><Header /><HomeMain /></>} />
         <Route path="/wishlist" element={<><Header /><WishlistPage /></>} />
       </Routes>
     </div>
