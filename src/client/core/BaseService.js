@@ -22,7 +22,6 @@ export class BaseService{
   }
 
   static GetImageURL(path, size="original"){
-    console.log(IMAGE_BASE_URL);
-    return `${IMAGE_BASE_URL}${size}${path}`;
+    return `${IMAGE_BASE_URL}/${size}${path}`;
   }
 }

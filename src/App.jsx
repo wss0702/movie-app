@@ -12,12 +12,13 @@ import { BaseService } from './client';
 
 const fetchData = async () => {
   const response = await BaseService.RetrieveApiData('/discover/movie', 'GET') // API 호출 방법.
+
   return response;
 }  
 
 function App() {
   const response = fetchData();
-
+  console.log(response);
 
   return (
     <div>

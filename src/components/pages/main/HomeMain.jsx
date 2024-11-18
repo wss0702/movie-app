@@ -2,6 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import './HomeMain.css';
+import { PosterGrid } from '../../common/Poster/PosterGrid';
+
+//import { Poster } from '../../common/Poster/Poster';
 //import Banner from './Banner/Banner';
 //import MovieRow from './MovieRow/MovieRow';
 //import URLService from '../../../util/movie/URLService';
@@ -43,12 +46,12 @@ function HomeMain() {
       window.removeEventListener('scroll', scrollListener);
     };
   }, [apiKey]);*/
+  
 
   return (
     <div className="home">
       인기영화
-      최신영화
-      액션영화
+    <PosterGrid />
     </div>
   );
 }
