@@ -7,6 +7,7 @@ import Header from './components/layout/Header/Header';
 
 
 import WishlistPage from './components/pages/wishlist/Wishlist';
+import PopularPage from './components/pages/popular/Popular';
 import HomeMain from './components/pages/main/HomeMain';
 import { BaseService } from './client';
 
@@ -25,6 +26,7 @@ function App() {
       <Routes>
         <Route path="/" element={<><Header /><HomeMain /></>} />
         <Route path="/wishlist" element={<><Header /><WishlistPage /></>} />
+        <Route path="/popular" element={<><Header /><PopularPage /></>} />
       </Routes>
     </div>
   );
