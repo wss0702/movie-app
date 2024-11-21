@@ -36,6 +36,7 @@ export const PosterGrid = () => {
   }
 
   return (
+    
     <div className="poster-grid">
       {movies.map((movie) => (
         <div className="poster-card" key={movie.id}>
@@ -44,9 +45,16 @@ export const PosterGrid = () => {
             src={movie.poster_path ? BaseService.GetImageURL(movie.poster_path, "w500") : ""}
             alt={movie.title || movie.name}
           />
-          <div className="poster-title">{movie.title || movie.name}</div>
+          <div className="poster-content">
+            <h3 className="poster-title">{movie.title || movie.name}</h3>
+            <div className="poster-buttons">
+              <button className="poster-button play">Play</button>
+              <button className="poster-button info">Info</button>
+            </div>
+          </div>
         </div>
       ))}
     </div>
+
   );
 };
