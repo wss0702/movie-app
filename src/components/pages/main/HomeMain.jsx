@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import './HomeMain.css';
 import { PosterGrid } from '../../common/Poster/PosterGrid';
-import { Poster } from '../../common/Poster/Poster';
+
 //import { Poster } from '../../common/Poster/Poster';
 //import Banner from './Banner/Banner';
 //import MovieRow from './MovieRow/MovieRow';

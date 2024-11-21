@@ -55,6 +55,5 @@ export const PosterGrid = () => {
         </div>
       ))}
     </div>
-
   );
 };

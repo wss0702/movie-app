@@ -1,6 +1,6 @@
 /* 공통 포스터 그리드 스타일 */
 .poster-grid {
-  display: grid;
+  display: flex;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 20px;
   padding: 20px;
