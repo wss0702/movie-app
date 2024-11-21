@@ -10,6 +10,7 @@ import WishlistPage from './components/pages/wishlist/Wishlist';
 import PopularPage from './components/pages/popular/Popular';
 import HomeMain from './components/pages/main/HomeMain';
 import Login from './components/pages/signin/login';
+import SearchPage from './components/pages/search/Search';
 import { BaseService } from './client';
 
 const fetchData = async () => {
@@ -28,6 +29,7 @@ function App() {
         <Route path="/" element={<><Header /><HomeMain /></>} />
         <Route path="/wishlist" element={<><Header /><WishlistPage /></>} />
         <Route path="/popular" element={<><Header /><PopularPage /></>} />
+        <Route path="/search" element={<><Header /><SearchPage /></>} />
         <Route path="/signin" element={<Login />} />
       </Routes>
     </div>

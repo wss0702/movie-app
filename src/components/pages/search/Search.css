@@ -1,0 +1,117 @@
+.container-search {
+  margin-top: 20px; /* 헤더 아래에 배치 */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 중앙 정렬 */
+}
+
+.container-search-bar {
+  width: 70%; /* 검색창과 버튼의 적절한 크기 조정 */
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+  margin-right: 10px;
+}
+
+.content-search {
+  width: 100%;
+  padding: 15px; /* 검색창 높이를 늘림 */
+  font-size: 1.2rem; /* 텍스트 크기를 키움 */
+  border: 1px solid #ccc;
+  border-radius: 8px; /* 둥근 모서리 */
+  outline: none;
+  color: #fff; /* 텍스트 색상 */
+  background-color: rgba(0, 0, 0, 0.7); /* 검색창 배경 */
+  transition: all 0.3s ease;
+}
+
+.content-search:focus {
+  border-color: #2069ff;
+  background-color: rgba(0, 0, 0, 0.9); /* 포커스 상태에서 배경 강조 */
+}
+
+label {
+  position: absolute;
+  top: 50%;
+  left: 15px; /* padding 크기와 일치시킴 */
+  transform: translateY(-50%);
+  color: #999;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.content-search.has-value + label,
+.content-search:focus + label {
+  top: -10px;
+  font-size: 0.85rem;
+  color: #2069ff;
+}
+
+button {
+  background-color: #2069ff;
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #1a5bd2;
+}
+
+.search-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.movie-card img {
+  width: 100%;
+  height: auto;
+  border-bottom: 2px solid #444;
+}
+
+.movie-card h3 {
+  margin: 10px 0;
+  font-size: 1rem;
+  color: #fff;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 90%;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
