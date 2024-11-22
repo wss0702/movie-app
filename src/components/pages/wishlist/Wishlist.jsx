@@ -1,27 +1,29 @@
 // src/pages/wishlist/Wishlist.jsx
-import React, { useEffect, useState } from "react";
-import WishlistManager from "../../../hooks/useWishlist";
+import React, { useState, useEffect } from "react";
 import "./Wishlist.css";
 
 const Wishlist = () => {
   const [wishlist, setWishlist] = useState([]);
 
-  // Wishlist 데이터를 로드합니다.
+  // Local Storage에서 찜 목록 가져오기
   useEffect(() => {
-    setWishlist(WishlistManager.getWishlist());
+    const storedWishlist = JSON.parse(localStorage.getItem("movieWishlist")) || [];
+    setWishlist(storedWishlist);
   }, []);
 
-  // 영화 제거 핸들러
+  // 찜 목록에서 영화 제거
   const handleRemove = (movieId) => {
-    WishlistManager.removeFromWishlist(movieId);
-    setWishlist(WishlistManager.getWishlist()); // 상태 업데이트
+    const updatedWishlist = wishlist.filter((movie) => movie.id !== movieId);
+    setWishlist(updatedWishlist);
+    localStorage.setItem("movieWishlist", JSON.stringify(updatedWishlist)); // 로컬 스토리지 업데이트
   };
 
-  // Wishlist가 비어있는 경우 처리
+  // 찜 목록이 비어있는 경우 처리
   if (wishlist.length === 0) {
     return (
-      <div className="wishlist-empty">
-        <h2>Your wishlist is empty.</h2>
+      <div className="wishlist-page">
+        <h1>My Wishlist</h1>
+        <p className="empty-message">Your wishlist is empty.</p>
       </div>
     );
   }

@@ -34,6 +34,18 @@ const Row = ({ title, fetchUrl, isLargeRow = false }) => {
     });
   };
 
+  const addToWishlist = (movie) => {
+    const storedWishlist = JSON.parse(localStorage.getItem("movieWishlist")) || [];
+    const exists = storedWishlist.some((item) => item.id === movie.id);
+    if (!exists) {
+      storedWishlist.push(movie);
+      localStorage.setItem("movieWishlist", JSON.stringify(storedWishlist));
+      alert(`${movie.title} has been added to your wishlist.`);
+    } else {
+      alert(`${movie.title} is already in your wishlist.`);
+    }
+  };
+
   return (
     <div className="row">
       <h2>{title}</h2>
@@ -56,6 +68,8 @@ const Row = ({ title, fetchUrl, isLargeRow = false }) => {
                 isLargeRow ? movie.poster_path : movie.backdrop_path
               }`}
               alt={movie.title || movie.name}
+              
+              onClick={() => addToWishlist(movie)}
             />
           ))}
         </div>
