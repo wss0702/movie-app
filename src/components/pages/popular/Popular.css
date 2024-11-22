@@ -19,7 +19,7 @@ h1 {
 }
 
 .view-mode-toggle button {
-  padding: 10px 20px;
+  padding: 10px 330px;
   font-size: 1rem;
   font-weight: bold;
   border: none;
@@ -37,6 +37,36 @@ h1 {
 .view-mode-toggle .active {
   background-color: #555;
   color: #fff;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.movie-card {
+  text-align: center;
+  background-color: #222;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+.movie-card img {
+  width: 100%;
+  border-bottom: 2px solid #333;
+}
+
+.movie-card h3 {
+  padding: 10px;
+  font-size: 1rem;
+  color: white;
 }
 
 .movie-table {
@@ -102,6 +132,7 @@ h1 {
 
 .loading-message {
   text-align: center;
+  margin-top: 20px;
   font-size: 1.2rem;
   color: gray;
 }
