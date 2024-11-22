@@ -1,57 +1,74 @@
-import axios from '../api/axios';
-import React, { useEffect, useState } from 'react';
-import './Row.css';
-import MovieModal from './MovieModal';
-import Poster from '../../../common/Poster/Poster';
+// src/components/main/Row.jsx
+import React, { useState, useEffect } from "react";
+import { BaseService } from "../../../../client"; // API 호출 서비스
+import "./Row.css";
 
-export default function Row({ isLargerRow, title, id, fetchUrl }) {
-
+const Row = ({ title, fetchUrl, isLargeRow = false }) => {
   const [movies, setMovies] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [movieSelected, setMovieSelected] = useState({});
-
-  const handleClick = (movie) => {
-    setModalOpen(true);
-    setMovieSelected(movie);
-  };
 
   useEffect(() => {
-    fetchMovieData();
-  }, []);
+    const fetchMovies = async () => {
+      try {
+        const response = await BaseService.RetrieveApiData(fetchUrl, "GET");
+        const results = response?.results || [];
+        setMovies(results);
+      } catch (error) {
+        console.error("Failed to fetch movies:", error);
+      }
+    };
 
-  const fetchMovieData = async () => {
-    const response = await BaseService.RetrieveApiData(fetchURL, "GET");
-    setMovies(response.data.results);
+    fetchMovies();
+  }, [fetchUrl]);
+
+  const handleScrollLeft = () => {
+    document.querySelector(`#row-${title}`).scrollBy({
+      left: -500,
+      behavior: "smooth",
+    });
+  };
+
+  const handleScrollRight = () => {
+    document.querySelector(`#row-${title}`).scrollBy({
+      left: 500,
+      behavior: "smooth",
+    });
   };
 
   return (
-    <section className='row'>
+    <div className="row">
       <h2>{title}</h2>
-      <div className='slider'>
-        <div className='slider__arrow-left'>
-          <span className='arrow'
-            onClick={() => {
-              document.getElementById(id).scrollLeft -= window.innerWidth - 80;
-            }}>
-            {"<"}
-          </span>
+      <div className="slider">
+        <div
+          className="slider__arrow-left"
+          onClick={handleScrollLeft}
+          role="button"
+        >
+          <span className="arrow">◀</span>
         </div>
-        <div id={id} className='row__posters'>
+        <div className="row__posters" id={`row-${title}`}>
           {movies.map((movie) => (
-            <div key={movie.id} onClick={() => handleClick(movie)}>
-              <Poster data={movie} error={null} />
-            </div>
+            <img
+              key={movie.id}
+              className={`row__poster ${
+                isLargeRow ? "row__posterLarge" : ""
+              }`}
+              src={`https://image.tmdb.org/t/p/w500${
+                isLargeRow ? movie.poster_path : movie.backdrop_path
+              }`}
+              alt={movie.title || movie.name}
+            />
           ))}
         </div>
-        <div className='slider__arrow-right'>
-          <span className='arrow'
-            onClick={() => {
-              document.getElementById(id).scrollLeft += window.innerWidth - 80;
-            }}>
-            {">"}
-          </span>
+        <div
+          className="slider__arrow-right"
+          onClick={handleScrollRight}
+          role="button"
+        >
+          <span className="arrow">▶</span>
         </div>
       </div>
-    </section>
+    </div>
   );
-}
+};
+
+export default Row;
