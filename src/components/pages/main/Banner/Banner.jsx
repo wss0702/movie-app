@@ -26,15 +26,28 @@ const Banner = () => {
     fetchBannerMovie();
   }, []);
 
-  // 영화 데이터가 로드되지 않았다면 로딩 메시지 출력
-  if (!movie) {
-    return <div className="banner-loading">Loading...</div>;
-  }
-
   // 긴 설명 텍스트를 줄이는 함수
   const truncate = (str, length) => {
     return str?.length > length ? str.substring(0, length - 1) + "..." : str;
   };
+
+  // Wishlist에 영화 추가
+  const addToWishlist = (movie) => {
+    const storedWishlist = JSON.parse(localStorage.getItem("movieWishlist")) || [];
+    const exists = storedWishlist.some((item) => item.id === movie.id);
+    if (!exists) {
+      storedWishlist.push(movie);
+      localStorage.setItem("movieWishlist", JSON.stringify(storedWishlist));
+      alert(`${movie.title || movie.name} has been added to your wishlist.`);
+    } else {
+      alert(`${movie.title || movie.name} is already in your wishlist.`);
+    }
+  };
+
+  // 영화 데이터가 로드되지 않았다면 로딩 메시지 출력
+  if (!movie) {
+    return <div className="banner-loading">Loading...</div>;
+  }
 
   return (
     <header
@@ -47,13 +60,15 @@ const Banner = () => {
     >
       <div className="banner-contents">
         <h1 className="banner-title">{movie.title || movie.name || "Movie Title"}</h1>
+        <p className="banner-description">{truncate(movie.overview, 150)}</p>
         <div className="banner-buttons">
-          <button className="banner-button">Play</button>
-          <button className="banner-button">My List</button>
+          <button
+            className="banner-button"
+            onClick={() => addToWishlist(movie)}
+          >
+            My List
+          </button>
         </div>
-        <p className="banner-description">
-          {truncate(movie.overview, 150)}
-        </p>
       </div>
       <div className="banner-fadeBottom" />
     </header>
