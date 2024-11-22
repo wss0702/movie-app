@@ -2,6 +2,7 @@ import axios from "axios";
 
 const BASE_API_URL = import.meta.env.VITE_APP_TMDB_BASE_URL;
 const IMAGE_BASE_URL = import.meta.env.VITE_APP_TMDB_BASE_IMAGE_URL;
+const BASE_SEARCH_URL = import.meta.env.VITE_APP_TMDB_BASE_SEARCH_URL;
 
 export class BaseService{
   static async RetrieveApiData(url, method, data) {
@@ -22,7 +23,10 @@ export class BaseService{
   }
 
   static GetImageURL(path, size="original"){
-    console.log(IMAGE_BASE_URL);
-    return `${IMAGE_BASE_URL}${size}${path}`;
+    return `${IMAGE_BASE_URL}/${size}${path}`;
+  }
+  
+  static GetSearchURL(path, size="original"){
+    return `${BASE_SEARCH_URL}/${size}${path}`;
   }
 }

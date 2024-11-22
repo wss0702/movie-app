@@ -1,136 +1,70 @@
-/* MovieWishlist.css */
+/* src/pages/wishlist/Wishlist.css */
 
-.wishlist-indicator {
-  position: absolute;
-  top: 0;
-  right: 10px;
-  font-size: 20px;
-  background-color: rgba(229, 9, 20, 0.5);
-  box-shadow: 0 0 5px rgba(229, 9, 20, 0.7);
+.wishlist-page {
+  padding: 20px;
+  text-align: center;
+  color: white;
+  background-color: #111;
 }
 
-.movie-grid {
-  width: 100%;
-  height: calc(100vh - 200px);
-  margin-bottom: 40px;
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
 }
 
-.grid-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.empty-message {
+  font-size: 1.5rem;
+  color: gray;
 }
 
-.movie-row {
-  display: flex;
-  justify-content: center;
-  margin: 0 auto 20px;
-  width: 100%;
+.wishlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+  padding: 20px;
 }
 
-.grid-container.list .movie-row {
-  flex-direction: column;
-}
-
-.movie-card {
-  width: 160px;
-  margin: 0 10px;
-  transition: transform 0.3s;
+.wishlist-card {
+  background: #222;
+  color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
   position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.grid-container.list .movie-card {
+.wishlist-card:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+}
+
+.wishlist-poster {
   width: 100%;
-  display: flex;
-  align-items: center;
+  height: auto;
+}
+
+.wishlist-info {
+  padding: 10px;
+}
+
+.wishlist-info h3 {
+  font-size: 1.2rem;
   margin-bottom: 10px;
 }
 
-.movie-card:hover {
-  transform: scale(1.05);
-}
-
-.movie-card img {
-  width: 100%;
-  border-radius: 4px;
-  object-fit: cover;
-}
-
-.grid-container.list .movie-card img {
-  width: 100px;
-  margin-right: 20px;
-}
-
-.movie-title {
-  margin-top: 5px;
-  text-align: center;
-  font-size: 14px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.grid-container.list .movie-title {
-  text-align: left;
-  white-space: normal;
-}
-
-.empty-wishlist {
-  text-align: center;
-  font-size: 18px;
-  margin-top: 20px;
-  color: #666;
-}
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.pagination button {
-  background-color: #333;
+.remove-button {
+  padding: 5px 10px;
+  font-size: 1rem;
+  font-weight: bold;
   color: white;
+  background-color: #ff4d4f;
   border: none;
-  padding: 10px 15px;
-  margin: 0 10px;
+  border-radius: 5px;
   cursor: pointer;
-  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
-.pagination button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-@media (max-width: 768px) {
-  .movie-grid {
-    width: 100%;
-    height: calc(90vh - 200px);
-    margin-bottom: 40px;
-    margin-top: 30px;
-  }
-
-  .movie-card {
-    width: 90px;
-    margin: 0 5px;
-  }
-
-  .movie-title {
-    font-size: 12px;
-  }
-
-  .pagination button {
-    padding: 8px 12px;
-    font-size: 14px;
-  }
-
-  .grid-container.list .movie-card img {
-    width: 60px;
-  }
+.remove-button:hover {
+  background-color: #d11a2a;
 }

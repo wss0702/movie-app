@@ -1,0 +1,47 @@
+.poster-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #1e1e1e;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 200px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.poster-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.poster-image {
+  width: 100%;
+  height: auto;
+  border-bottom: 2px solid #444;
+}
+
+.poster-title {
+  margin: 10px 0;
+  font-size: 1rem;
+  color: #fff;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.poster-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 300px;
+  background-color: #444;
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 10px;
+  text-align: center;
+}
