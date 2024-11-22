@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css"; // CSS 파일을 import합니다.
 
 const Login = () => {
@@ -10,6 +11,9 @@ const Login = () => {
     password: "",
     confirmPassword: "",
   });
+  const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
 
   const toggleForm = () => {
     setIsLoginVisible(!isLoginVisible);
@@ -24,12 +28,54 @@ const Login = () => {
     }
   };
 
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const { name, email, password, confirmPassword } = registerInputs;
+
+    if (password !== confirmPassword) {
+      setError("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const userExists = users.find((user) => user.email === email);
+
+    if (userExists) {
+      setError("이미 존재하는 사용자입니다.");
+      return;
+    }
+
+    const newUser = { name, email, password };
+    users.push(newUser);
+    localStorage.setItem("users", JSON.stringify(users));
+    setError(null);
+    toggleForm();
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const { email, password } = loginInputs;
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const user = users.find(
+      (user) => user.email === email && user.password === password
+    );
+
+    if (user) {
+      setError(null);
+      navigate("/"); // 로그인 성공 시 홈 화면으로 이동
+    } else {
+      setError("이메일 또는 비밀번호가 올바르지 않습니다.");
+    }
+  };
+
   return (
     <div className="container">
       <div className="bg-image"></div>
+
       {/* 로그인 폼 */}
       <div className={`card ${!isLoginVisible ? "hidden" : ""}`} id="login">
-        <form>
+        <form onSubmit={handleLogin}>
           <h1>로그인</h1>
           <div className="input">
             <input
@@ -55,25 +101,27 @@ const Login = () => {
               비밀번호
             </label>
           </div>
-          <div className="checkbox-container">
+          {error && <p className="error-message">{error}</p>}
+          <div className="checkbox">
             <div className="remember">
               <input type="checkbox" id="remember-me" />
-              <label htmlFor="remember-me">기억하기</label>
+              <label htmlFor="remember-me">아이디와 비밀번호 기억하기</label>
             </div>
             <div className="forgot">
               <a href="#">비밀번호 찾기</a>
             </div>
           </div>
           <button type="submit">로그인</button>
-          <p className="account-check" onClick={toggleForm}>
-            회원가입
-          </p>
         </form>
+        {/* .account-check 요소를 폼 외부로 이동 */}
+        <p className="account-check" onClick={toggleForm}>
+          이미 계정이 있으신가요? <span>로그인</span>
+        </p>
       </div>
 
       {/* 회원가입 폼 */}
       <div className={`card ${isLoginVisible ? "hidden" : ""}`} id="register">
-        <form>
+        <form onSubmit={handleRegister}>
           <h1>회원가입</h1>
           <div className="input">
             <input
@@ -120,16 +168,20 @@ const Login = () => {
               required
             />
             <label
-              className={registerInputs.confirmPassword ? "label-active" : ""}
+              className={
+                registerInputs.confirmPassword ? "label-active" : ""
+              }
             >
               비밀번호 확인
             </label>
           </div>
+          {error && <p className="error-message">{error}</p>}
           <button type="submit">회원가입</button>
-          <p className="account-check" onClick={toggleForm}>
-            로그인
-          </p>
         </form>
+        {/* .account-check 요소를 폼 외부로 이동 */}
+        <p className="account-check" onClick={toggleForm}>
+           계정이 없으신가요? <span>회원가입</span>
+        </p>
       </div>
     </div>
   );
