@@ -45,11 +45,10 @@ const Search = () => {
           <input
             type="text"
             className={`content-search ${searchInput ? "has-value" : ""}`}
-            placeholder=" "
+            placeholder="검색어를 입력하세요"
             value={searchInput}
             onChange={handleInputChange}
           />
-          <label>검색어를 입력하세요</label>
         </div>
         <button onClick={handleSearch}>검색</button>
       </div>
