@@ -1,6 +1,14 @@
 /* 검색 페이지 컨테이너 */
+body {
+  display: block !important;
+  margin: 0;
+  place-items: unset !important;
+  min-width: unset;
+  min-height: unset;
+}
+
 .container-search {
-  margin-top: 20px; /* 헤더 아래 배치 */
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,27 +18,28 @@
   margin-right: auto;
 }
 
-/* 검색 영역 컨테이너 */
+/* 검색 및 필터 영역 */
 .container-search-bar {
-  display: flex;
+  display: flex; /* 가로 정렬 */
+  flex-wrap: wrap; /* 화면 크기에 따라 줄 바꿈 */
   justify-content: center;
   align-items: center;
   width: 100%;
-  gap: 10px;
+  gap: 15px; /* 항목 간격 */
   margin-bottom: 20px;
 }
 
 /* 검색 입력창을 감싸는 컨테이너 */
 .input-container {
-  flex-grow: 1;
-  max-width: 600px; /* 검색 입력창의 최대 너비 */
+  flex-grow: 1; /* 입력창의 크기를 유연하게 설정 */
+  max-width: 600px; /* 최대 너비 제한 */
 }
 
 /* 검색 입력창 */
 .content-search {
-  width: 100%;
+  width: 100%; /* 입력창이 컨테이너 크기를 채우도록 설정 */
   padding: 15px;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   border: 1px solid #ccc;
   border-radius: 8px;
   outline: none;
@@ -46,14 +55,15 @@
 
 /* 검색 버튼 */
 .search-button {
-  padding: 15px 20px;
-  font-size: 1.2rem;
+  padding: 10px 15px; /* 버튼 크기 줄임 */
+  font-size: 1rem; /* 글씨 크기 조정 */
   border: none;
   border-radius: 8px;
   background-color: #2069ff;
   color: #fff;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  height: 100%; /* 입력창 높이와 맞춤 */
 }
 
 .search-button:hover {
@@ -62,13 +72,9 @@
 
 /* 필터 컨테이너 */
 .filter-container {
-  display: flex;
-  gap: 10px;
-  margin: 20px 0;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
+  display: flex; /* 가로 정렬 */
+  gap: 10px; /* 항목 간격 */
+  align-items: center; /* 세로 가운데 정렬 */
 }
 
 .filter-container select,
@@ -154,6 +160,10 @@
 
 /* 반응형 디자인 */
 @media screen and (max-width: 768px) {
+  .container-search-bar {
+    flex-direction: column; /* 작은 화면에서 세로 정렬 */
+  }
+
   .content-search,
   .filter-container select,
   .filter-container input,
