@@ -136,3 +136,44 @@ h1 {
   font-size: 1.2rem;
   color: gray;
 }
+@media (max-width: 768px) {
+  .movie-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+
+  .view-mode-toggle {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .view-mode-toggle button {
+    width: 100%;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .pagination-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .movie-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+
+  .movie-card h3 {
+    font-size: 0.9rem;
+  }
+
+  .pagination-info {
+    font-size: 0.9rem;
+  }
+
+  .loading-message {
+    font-size: 1rem;
+  }
+}
