@@ -78,3 +78,44 @@
   color: white;
   background-color: #111;
 }
+@media (max-width: 768px) {
+  .banner {
+    height: auto;
+    margin-top: 60px;
+    padding: 10px;
+  }
+
+  .banner-title {
+    font-size: 2rem;
+  }
+
+  .banner-description {
+    width: 100%;
+    max-width: none;
+    height: auto;
+  }
+
+  .banner-buttons {
+    flex-direction: column;
+  }
+
+  .banner-button {
+    margin-right: 0;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-title {
+    font-size: 1.5rem;
+  }
+
+  .banner-description {
+    font-size: 0.875rem;
+  }
+
+  .banner-button {
+    padding: 8px 16px;
+  }
+}

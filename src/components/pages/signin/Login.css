@@ -400,3 +400,81 @@ button:hover {
     z-index:1;
   }
 }
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  #phone {
+    width: 90%;
+    max-width: 90%;
+    max-height: 70%;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+
+  .card {
+    width: 90%;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  button {
+    padding: 15px;
+  }
+
+  .input input {
+    font-size: 1rem;
+  }
+
+  .input label {
+    font-size: 1rem;
+  }
+
+  .checkbox {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .forgot a {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 400px) {
+  #phone {
+    width: 100%;
+    max-width: 100%;
+    max-height: 80%;
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+
+  .card {
+    width: 100%;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+
+  button {
+    padding: 12px;
+  }
+
+  .input input {
+    font-size: 0.9rem;
+  }
+
+  .input label {
+    font-size: 0.9rem;
+  }
+
+  .forgot a {
+    font-size: 0.8rem;
+  }
+}
