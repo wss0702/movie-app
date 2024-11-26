@@ -96,7 +96,7 @@ const Search = () => {
 
   return (
     <div className="container-search">
-      <h2>찾아보기</h2>
+      <h2>Search</h2>
 
       {/* 검색 및 필터 영역 */}
       <div className="container-search-bar">
