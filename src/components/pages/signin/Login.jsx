@@ -52,8 +52,10 @@ const Login = () => {
             <input
               type="text"
               {...registerLogin("email", { required: true })}
+              onFocus={(e) => e.target.classList.add('active')}
+              onBlur={(e) => e.target.value === '' && e.target.classList.remove('active')}
             />
-            <label className={watchLogin("password") || loginErrors.password ? "label-active" : ""}>
+            <label className={loginErrors.email ? "label-active" : ""}>
               이메일
             </label>
           </div>
@@ -62,7 +64,7 @@ const Login = () => {
               type="password"
               {...registerLogin("password", { required: true })}
             />
-            <label className={watchLogin("password") || loginErrors.password ? "label-active" : ""}>
+            <label className={loginErrors.password ? "label-active" : ""}>
               비밀번호
             </label>
           </div>
