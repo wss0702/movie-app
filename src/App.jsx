@@ -14,13 +14,8 @@ import SearchPage from './components/pages/search/Search';
 import { ToastContainer } from 'react-toastify';
 
 function App() {
-  useEffect(() => {
-    console.log('앱이 정상적으로 렌더링되고 있습니다.');
-  }, []);
   return (
     <div>
-
-      <p>앱이 정상적으로 렌더링되고 있습니다.</p>
       <Routes>
         <Route path="/" element={<><Header /><HomeMain /></>} />
         <Route path="/wishlist" element={<><Header /><WishlistPage /></>} />
