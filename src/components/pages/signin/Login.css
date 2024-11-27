@@ -481,3 +481,13 @@ button:hover {
     font-size: 0.8rem;
   }
 }
+
+.input input.active + label, /* active 클래스가 있을 때 레이블 스타일 */
+.input input:not(:placeholder-shown) + label { /* 입력값이 있을 때 레이블 스타일 */
+  transform: translateY(-20px) scale(0.8); /* 위로 이동 및 크기 축소 */
+  color: #2069ff; /* 레이블 색상 변경 */
+}
+
+.input label {
+  transition: transform 0.2s ease-out, color 0.2s ease-out; /* 부드러운 전환 효과 */
+}
