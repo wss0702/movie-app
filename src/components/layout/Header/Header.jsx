@@ -5,12 +5,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faTicketAlt, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { useAuth, isAuth } from '../../../hooks/useAuth';
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navigate = useNavigate();
+  const { isLogin, user, logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,9 +52,14 @@ function Header() {
           </nav>
         </div>
         <div className="header-right">
-          <button className="icon-button" onClick={removeKey}>
-            <FontAwesomeIcon icon={faUser} />
-          </button>
+          {isAuth() ? (
+            <>
+              <span>{user}님 환영합니다!</span>
+              <button onClick={logout}>로그아웃</button>
+            </>
+          ) : (
+            <a href="/signin">로그인</a>
+          )}
           <button className="icon-button mobile-menu-button" onClick={toggleMobileMenu}>
             <FontAwesomeIcon icon={faBars} />
           </button>

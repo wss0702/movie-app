@@ -1,35 +1,53 @@
 // src/hooks/useWishlist.js
-class WishlistManager {
-  constructor() {
-    this.key = "movieWishlist"; // Local Storage key
-    this.wishlist = JSON.parse(localStorage.getItem(this.key)) || []; // 초기화
-  }
+import { atom, useAtom } from 'jotai';
+import { useAuth } from './useAuth';
+import { useEffect } from 'react';
+import _ from 'lodash';
+import { useToast } from './useToast';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
-  getWishlist() {
-    return this.wishlist; // 현재 wishlist 반환
-  }
+export const useWishlist = () => {
+  const queryClient = useQueryClient()
+  const {user} = useAuth()
+  const toast = useToast();
 
-  addToWishlist(movie) {
-    const exists = this.wishlist.some((item) => item.id === movie.id);
-    if (!exists) {
-      this.wishlist.push(movie); // 영화 추가
-      this.saveWishlist();
+  const {data: wishlist, isLoading: isWishListLoading, error: wishListError} = useQuery({
+    queryKey:['wishList', user],
+    queryFn: async () => {
+      const data = JSON.parse(localStorage.getItem(`wishlist_${user}`)) || []
+      return data
     }
+  })
+
+  const wisiListMutaion = useMutation({
+    mutationFn: async (data) => {
+      localStorage.setItem(`wishlist_${user}`, JSON.stringify(data))
+      return data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['wishList', user] })
+    },
+    onError: (error) => {
+      toast.error(error.message)
+    }
+  })
+
+  const addToWishlist = (item) => {
+    const data = [...wishlist, item]
+    wisiListMutaion.mutate(data)
   }
 
-  removeFromWishlist(movieId) {
-    this.wishlist = this.wishlist.filter((item) => item.id !== movieId); // 영화 삭제
-    this.saveWishlist();
+  const removeFromWishlist = (item) => {
+    const updatedWishlist = wishlist.filter(wishItem => wishItem.id !== item.id);
+    wisiListMutaion.mutate(updatedWishlist);
   }
 
-  toggleWishlist(movie) {
-    const exists = this.wishlist.some((item) => item.id === movie.id);
-    exists ? this.removeFromWishlist(movie.id) : this.addToWishlist(movie); // 토글
-  }
 
-  saveWishlist() {
-    localStorage.setItem(this.key, JSON.stringify(this.wishlist)); // 로컬 스토리지 저장
-  }
-}
-
-export default new WishlistManager();
+  return {
+    wishlist,
+    isWishListLoading,
+    wishListError,
+    addToWishlist,
+    removeFromWishlist,
+  };
+};
