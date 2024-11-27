@@ -2,24 +2,14 @@
 import React, { useState, useEffect } from "react";
 import "./Wishlist.css";
 
+import { useWishlist } from "../../../hooks/useWishlist";
+
 const Wishlist = () => {
-  const [wishlist, setWishlist] = useState([]);
+  const { wishlist, removeFromWishlist, isWishListLoading } = useWishlist()
 
-  // Local Storage에서 찜 목록 가져오기
-  useEffect(() => {
-    const storedWishlist = JSON.parse(localStorage.getItem("movieWishlist")) || [];
-    setWishlist(storedWishlist);
-  }, []);
-
-  // 찜 목록에서 영화 제거
-  const handleRemove = (movieId) => {
-    const updatedWishlist = wishlist.filter((movie) => movie.id !== movieId);
-    setWishlist(updatedWishlist);
-    localStorage.setItem("movieWishlist", JSON.stringify(updatedWishlist)); // 로컬 스토리지 업데이트
-  };
 
   // 찜 목록이 비어있는 경우 처리
-  if (wishlist.length === 0) {
+  if (isWishListLoading) {
     return (
       <div className="wishlist-page">
         <h1>My Wishlist</h1>
@@ -28,11 +18,13 @@ const Wishlist = () => {
     );
   }
 
+  console.log(wishlist)
+
   return (
     <div className="wishlist-page">
       <h1>My Wishlist</h1>
       <div className="wishlist-grid">
-        {wishlist.map((movie) => (
+        {wishlist?.map((movie) => (
           <div key={movie.id} className="wishlist-card">
             <img
               src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
@@ -43,7 +35,7 @@ const Wishlist = () => {
               <h3>{movie.title}</h3>
               <button
                 className="remove-button"
-                onClick={() => handleRemove(movie.id)}
+                onClick={() => removeFromWishlist(movie)}
               >
                 Remove
               </button>
