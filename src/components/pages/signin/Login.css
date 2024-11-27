@@ -238,16 +238,19 @@ button:hover {
 }
 
 .checkbox {
-  margin-top: 2rem;
-  margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1rem;
 }
 
 .remember {
   display: flex;
   align-items: center;
+}
+
+.remember input[type="checkbox"] {
+  margin-right: 0.5rem;
 }
 
 /* float 속성 제거 */

@@ -66,14 +66,19 @@ const Login = () => {
               비밀번호
             </label>
           </div>
-          <div className="checkbox">
-            <div className="remember">
-              <input type="checkbox" {...registerLogin("remember")} />
-              <label htmlFor="remember-me">아이디와 비밀번호 기억하기</label>
-            </div>
-            <div className="forgot">
-              <a href="#">비밀번호 찾기</a>
-            </div>
+          <div className="checkbox-wrapper">
+            <input
+              type="checkbox"
+              id="remember-me"
+              {...registerLogin("remember")}
+            />
+            <label htmlFor="remember-me" className="checkbox-label">
+              아이디와 비밀번호 기억하기
+            </label>
+          </div>
+          <div className="forgot">
+            <a href="#">기억하기
+            </a>
           </div>
           <button type="submit">로그인</button>
         </form>
