@@ -3,9 +3,11 @@ import React, { useState, useEffect } from "react";
 import { BaseService } from "../../../../client"; // API 호출을 위한 서비스
 import "./Banner.css";
 
+import { useWishlist } from "../../../../hooks/useWishlist";
+
 const Banner = () => {
   const [movie, setMovie] = useState(null);
-
+  const { addToWishlist } = useWishlist()
   useEffect(() => {
     const fetchBannerMovie = async () => {
       try {
@@ -30,20 +32,6 @@ const Banner = () => {
   const truncate = (str, length) => {
     return str?.length > length ? str.substring(0, length - 1) + "..." : str;
   };
-
-  // Wishlist에 영화 추가
-  const addToWishlist = (movie) => {
-    const storedWishlist = JSON.parse(localStorage.getItem("movieWishlist")) || [];
-    const exists = storedWishlist.some((item) => item.id === movie.id);
-    if (!exists) {
-      storedWishlist.push(movie);
-      localStorage.setItem("movieWishlist", JSON.stringify(storedWishlist));
-      alert(`${movie.title || movie.name} has been added to your wishlist.`);
-    } else {
-      alert(`${movie.title || movie.name} is already in your wishlist.`);
-    }
-  };
-
   // 영화 데이터가 로드되지 않았다면 로딩 메시지 출력
   if (!movie) {
     return <div className="banner-loading">Loading...</div>;

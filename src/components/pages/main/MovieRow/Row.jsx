@@ -3,8 +3,11 @@ import React, { useState, useEffect } from "react";
 import { BaseService } from "../../../../client"; // API 호출 서비스
 import "./Row.css";
 
+import { useWishlist } from "../../../../hooks/useWishlist";
+
 const Row = ({ title, fetchUrl, isLargeRow = false }) => {
   const [movies, setMovies] = useState([]);
+  const { addToWishlist } = useWishlist()
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -32,18 +35,6 @@ const Row = ({ title, fetchUrl, isLargeRow = false }) => {
       left: 500,
       behavior: "smooth",
     });
-  };
-
-  const addToWishlist = (movie) => {
-    const storedWishlist = JSON.parse(localStorage.getItem("movieWishlist")) || [];
-    const exists = storedWishlist.some((item) => item.id === movie.id);
-    if (!exists) {
-      storedWishlist.push(movie);
-      localStorage.setItem("movieWishlist", JSON.stringify(storedWishlist));
-      alert(`${movie.title} has been added to your wishlist.`);
-    } else {
-      alert(`${movie.title} is already in your wishlist.`);
-    }
   };
 
   return (
