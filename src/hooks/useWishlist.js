@@ -45,6 +45,7 @@ export const useWishlist = () => {
 
   return {
     wishlist,
+    wishlist: _.uniqBy(wishlist, 'id'),
     isWishListLoading,
     wishListError,
     addToWishlist,
