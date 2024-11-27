@@ -53,7 +53,7 @@ const Login = () => {
               type="text"
               {...registerLogin("email", { required: true })}
             />
-            <label className={loginErrors.email ? "label-active" : ""}>
+            <label className={watchLogin("password") || loginErrors.password ? "label-active" : ""}>
               이메일
             </label>
           </div>
