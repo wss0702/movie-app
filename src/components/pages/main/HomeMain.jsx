@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import './HomeMain.css';
-import Banner from '../main/Banner/Banner';
-import Row from '../main/MovieRow/Row';
+import Banner from './Banner/Banner';
+import Row from './MovieRow/Row';
 
 function HomeMain() {
 
