@@ -12,7 +12,7 @@ import HomeMain from './components/pages/main/HomeMain';
 import Login from './components/pages/signin/Login';
 import SearchPage from './components/pages/search/Search';
 import { ToastContainer } from 'react-toastify';
-
+import OAuthRedirectHandler from "./components/pages/oauth/OAuthRedirectHandler";
 function App() {
   return (
     <div>
@@ -22,6 +22,7 @@ function App() {
         <Route path="/popular" element={<><Header /><PopularPage /></>} />
         <Route path="/search" element={<><Header /><SearchPage /></>} />
         <Route path="/signin" element={<Login />} />
+        <Route path="/oauth" element={<OAuthRedirectHandler />} /> {/* 추가된 라우트 */}
       </Routes>
       <ToastContainer/>
     </div>
