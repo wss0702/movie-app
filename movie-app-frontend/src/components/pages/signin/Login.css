@@ -491,3 +491,22 @@ button:hover {
 .input label {
   transition: transform 0.2s ease-out, color 0.2s ease-out; /* 부드러운 전환 효과 */
 }
+
+/* src/components/pages/signin/Login.css */
+
+.kakao-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #fee500;
+  color: #3c1e1e;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.kakao-button:hover {
+  background-color: #cdaa00;
+}

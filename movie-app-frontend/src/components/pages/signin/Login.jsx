@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import { useAuth } from "../../../hooks/useAuth";
+import { useAuth } from "../../../hooks/useAuth.js";
 import { useToast } from "../../../hooks/useToast.js";
 
 const Login = () => {
-  const { login, register: registerUser } = useAuth();
+  const { login, register: registerUser, kakaoLogin } = useAuth();
   const toast = useToast();
   const [isLoginVisible, setIsLoginVisible] = useState(true);
   const navigate = useNavigate();
@@ -38,6 +38,52 @@ const Login = () => {
     } catch (error) {
       toast.error(error.message);
     }
+  };
+
+  // 카카오 SDK 초기화
+  useEffect(() => {
+    if (window.Kakao) {
+      if (!window.Kakao.isInitialized()) {
+        window.Kakao.init(import.meta.env.VITE_APP_KAKAO_API_KEY);
+        console.log("Kakao SDK 초기화 완료");
+      }
+    } else {
+      console.error("Kakao SDK가 로드되지 않았습니다.");
+    }
+  }, []);
+
+  const handleKakaoLogin = () => {
+    if (!window.Kakao) {
+      toast.error("Kakao SDK가 로드되지 않았습니다.");
+      return;
+    }
+    window.Kakao.Auth.authorize({
+      redirectUri: import.meta.env.VITE_APP_KAKAO_REDIRECT_URI,
+    });
+
+    window.Kakao.Auth.login({
+      success: function(authObj) {
+        window.Kakao.API.request({
+          url: '/v2/user/me',
+          success: function(res) {
+            const kakaoUser = {
+              id: res.id,
+              nickname: res.properties.nickname,
+              // 추가 정보 필요 시 여기에 추가
+            };
+            kakaoLogin(kakaoUser);
+            toast.success(`${kakaoUser.nickname}님 환영합니다!`);
+            navigate("/");
+          },
+          fail: function(err) {
+            toast.error("카카오 사용자 정보를 불러오는 데 실패했습니다.");
+          }
+        });
+      },
+      fail: function(err) {
+        toast.error("카카오 로그인을 실패했습니다.");
+      },
+    });
   };
 
   return (
@@ -79,11 +125,13 @@ const Login = () => {
             </label>
           </div>
           <div className="forgot">
-            <a href="#">기억하기
-            </a>
+            <a href="#">기억하기</a>
           </div>
           <button type="submit">로그인</button>
         </form>
+        <button onClick={handleKakaoLogin} className="kakao-button">
+          카카오 로그인
+        </button>
         <p className="account-check" onClick={toggleForm}>
           이미 계정이 있으신가요? <span>로그인</span>
         </p>
